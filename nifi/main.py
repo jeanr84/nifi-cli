@@ -5,7 +5,10 @@ from prompt_toolkit.history import InMemoryHistory
 def main():
     history = InMemoryHistory()
 
-    cmd=""
+    cmd = ""
     while cmd != 'exit':
-        cmd = prompt("> ", history=history)
-        print('You entered:', cmd)
+        try:
+            cmd = prompt("> ", history=history)
+            print('You entered:', cmd)
+        except EOFError:
+            cmd = 'exit'
