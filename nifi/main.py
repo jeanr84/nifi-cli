@@ -1,3 +1,5 @@
+import sys
+
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory
 
@@ -12,3 +14,7 @@ def main():
             print('You entered:', cmd)
         except EOFError:
             cmd = 'exit'
+        except KeyboardInterrupt:
+            sys.exit()
+
+    print('Bye!')
