@@ -1,4 +1,16 @@
-tree = {'flowfile-queues': {'listing-requests': {'get': {}, 'post': {}}, 'drop-requests': {'get': {}, 'post': {}},
+from bs4 import BeautifulSoup
+import urllib.request
+
+class Completion:
+
+    REST_API_URL = "http://localhost:8080/nifi-docs/rest-api/index.html"
+
+    html =  urllib.request.urlopen(REST_API_URL).read()
+    soup = BeautifulSoup(html, "html.parser")
+
+
+
+    tree = {'flowfile-queues': {'listing-requests': {'get': {}, 'post': {}}, 'drop-requests': {'get': {}, 'post': {}},
                             'flowfiles': {'get': {}, 'content': {'get': {}}}}, 'counters': {'get': {}, 'put': {}},
         'policies': {'get': {}, 'post': {}}, 'funnels': {'get': {}},
         'tenants': {'search-results': {'get': {}}, 'user-groups': {'get': {}, 'post': {}},
