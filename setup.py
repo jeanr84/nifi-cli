@@ -17,6 +17,7 @@ setup(
     packages=['nifi_cli'],
     long_description=read('README.md'),
     install_requires=[
+        'click==6.7',
         'prompt_toolkit==1.0.14'
     ],
     classifiers=[
