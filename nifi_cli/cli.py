@@ -1,4 +1,5 @@
 import click
+from halo import Halo
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory
 
@@ -11,7 +12,16 @@ from .completer import NifiCompleter
 def cli(host, port):
     history = InMemoryHistory()
 
-    click.secho('Trying to connect to {}:{}'.format(host, port), bg='blue', fg='white')
+    with Halo(text='Trying to connect to {}:{}'.format(host, port), spinner='earth') as spinner:
+        import time
+
+        time.sleep(1)
+
+        spinner.text = 'Fetching API'
+
+        time.sleep(1)
+
+        spinner.succeed('Connected')
 
     cmd = ""
     while cmd != 'exit':
