@@ -1,11 +1,17 @@
+import click
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory
 
 from .completer import NifiCompleter
 
 
-def cli():
+@click.command()
+@click.option('--host', prompt='NiFi host')
+@click.option('--port', default=8080)
+def cli(host, port):
     history = InMemoryHistory()
+
+    click.secho('Trying to connect to {}:{}'.format(host, port), bg='blue', fg='white')
 
     cmd = ""
     while cmd != 'exit':
