@@ -9,7 +9,6 @@ class NifiCompleter(Completer):
     def get_completions(self, document, complete_event):
         text = document.text
 
-        # TODO : do this only at the beginning
         current_tree = self.tree
         words = text.split('.')
 
