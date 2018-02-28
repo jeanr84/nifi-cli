@@ -5,12 +5,14 @@ import urllib.request
 
 class NifiCompletion:
 
+
     def __init__(self, host, port):
         self.host = host
         self.port = port
 
     def get_html_content(self):
         URL = "http://" + self.host + ":" + str(self.port)
+
         REST_API_PAGE = URL + "/nifi-docs/rest-api/index.html"
 
         html = urllib.request.urlopen(REST_API_PAGE).read()
