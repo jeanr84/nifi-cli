@@ -1,11 +1,10 @@
 from prompt_toolkit.completion import Completer, Completion
-from nifi_cli.completion import NifiCompletion
 
 
 class NifiCompleter(Completer):
 
-    def __init__(self):
-        self.tree = NifiCompletion().create_tree()
+    def __init__(self, tree):
+        self.tree = tree
 
     def get_completions(self, document, complete_event):
         text = document.text

@@ -5,9 +5,12 @@ import urllib.request
 
 class NifiCompletion:
 
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+
     def get_html_content(self):
-        # TODO : Make the hostname and port configurable
-        URL = "http://localhost:8080"
+        URL = "http://" + self.host + ":" + str(self.port)
         REST_API_PAGE = URL + "/nifi-docs/rest-api/index.html"
 
         html = urllib.request.urlopen(REST_API_PAGE).read()
@@ -17,10 +20,7 @@ class NifiCompletion:
         tree = {}
         p = re.compile("{.*}")
 
-        try:
-            html_content = self.get_html_content()
-        except urllib.error.URLError:
-            return {}
+        html_content = self.get_html_content()
 
         for html_endpoint in html_content.findAll("div", {"class": "endpoints"}):
             # TODO : Fix the "path hidden" part which ignore some endpoints (ex : labels)
