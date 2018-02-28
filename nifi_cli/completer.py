@@ -1,13 +1,17 @@
 from prompt_toolkit.completion import Completer, Completion
-
-from .completion import tree
+from nifi_cli.completion import NifiCompletion
 
 
 class NifiCompleter(Completer):
+
+    def __init__(self):
+        self.tree = NifiCompletion().create_tree()
+
     def get_completions(self, document, complete_event):
         text = document.text
 
-        current_tree = tree
+        # TODO : do this only at the beginning
+        current_tree = self.tree
         words = text.split('.')
 
         for index, part in enumerate(words):
