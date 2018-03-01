@@ -25,9 +25,8 @@ class NifiCompletion:
         html_content = self.get_html_content()
 
         for html_endpoint in html_content.findAll("div", {"class": "endpoints"}):
-            # TODO : Fix the "path hidden" part which ignore some endpoints (ex : labels)
             endpoint = html_endpoint.find("span", {"class": "path hidden"}).string
-            method = html_endpoint.find("div", {"class": "method"}).string.lower()
+            methods = map((lambda x: x.string.lower()), html_endpoint.findAll("div", {"class": "method"}))
             current_tree = tree
             parts = endpoint[1:].split('/')
             for part in parts:
@@ -35,6 +34,7 @@ class NifiCompletion:
                     if part not in current_tree:
                         current_tree[part] = {}
                     current_tree = current_tree[part]
-            current_tree[method] = None
+            for method in methods:
+                current_tree[method] = None
 
         return tree
